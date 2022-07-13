@@ -39,6 +39,11 @@ final class InvoiceEmailSender implements InvoiceEmailSenderInterface
     ): void {
         $invoicePdf = $this->invoiceFileProvider->provide($invoice);
 
+        if (!is_file($invoicePdf->fullPath())) {
+            $invoicePdf->setFullPath(sprintf('%s/%s', sys_get_temp_dir(), $invoicePdf->filename()));
+            file_put_contents($invoicePdf->fullPath(), $invoicePdf->content());
+        }
+
         $this
             ->emailSender
             ->send(Emails::INVOICE_GENERATED, [$customerEmail], ['invoice' => $invoice], [$invoicePdf->fullPath()])

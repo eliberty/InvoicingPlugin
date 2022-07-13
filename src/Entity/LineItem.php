@@ -52,6 +52,9 @@ class LineItem implements LineItemInterface, ResourceInterface
     /** @var int */
     protected $total;
 
+    /** @var string */
+    protected $descriptionTimeSlot;
+
     public function __construct(
         string $name,
         int $quantity,
@@ -61,7 +64,8 @@ class LineItem implements LineItemInterface, ResourceInterface
         int $total,
         ?string $variantName = null,
         ?string $variantCode = null,
-        ?string $taxRate = null
+        ?string $taxRate = null,
+        ?string $descriptionTimeSlot = null
     ) {
         $this->name = $name;
         $this->quantity = $quantity;
@@ -72,6 +76,7 @@ class LineItem implements LineItemInterface, ResourceInterface
         $this->variantName = $variantName;
         $this->variantCode = $variantCode;
         $this->taxRate = $taxRate;
+        $this->descriptionTimeSlot = $descriptionTimeSlot;
     }
 
     public function getId()
@@ -137,6 +142,11 @@ class LineItem implements LineItemInterface, ResourceInterface
     public function total(): int
     {
         return $this->total;
+    }
+
+    public function descriptionTimeSlot(): ?string
+    {
+        return $this->descriptionTimeSlot;
     }
 
     public function merge(LineItemInterface $newLineItem): void

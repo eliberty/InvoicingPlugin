@@ -47,7 +47,8 @@ final class LineItemFactory implements LineItemFactoryInterface
         int $total,
         ?string $variantName = null,
         ?string $variantCode = null,
-        ?string $taxRate = null
+        ?string $taxRate = null,
+        ?string $descriptionTimeSlot = null
     ): LineItemInterface {
         return new $this->className(
             $name,
@@ -58,7 +59,8 @@ final class LineItemFactory implements LineItemFactoryInterface
             $total,
             $variantName,
             $variantCode,
-            $taxRate
+            $taxRate,
+            $descriptionTimeSlot
         );
     }
 }

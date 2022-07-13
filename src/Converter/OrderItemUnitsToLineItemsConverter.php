@@ -52,6 +52,7 @@ final class OrderItemUnitsToLineItemsConverter implements LineItemsConverterInte
         /** @var OrderItemInterface $item */
         $item = $unit->getOrderItem();
 
+        $descriptionTimeSlot = $item->getTimeSlotDescription();
         $grossValue = $unit->getTotal();
         $taxAmount = $unit->getTaxTotal();
         $netValue = $grossValue - $taxAmount;
@@ -71,7 +72,8 @@ final class OrderItemUnitsToLineItemsConverter implements LineItemsConverterInte
             $grossValue,
             $item->getVariantName(),
             $variant !== null ? $variant->getCode() : null,
-            $this->taxRatePercentageProvider->provideFromAdjustable($unit)
+            $this->taxRatePercentageProvider->provideFromAdjustable($unit),
+            $descriptionTimeSlot
         );
     }
 
